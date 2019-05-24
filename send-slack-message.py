@@ -31,6 +31,9 @@ if __name__ == "__main__":
                         type=str,
                         default="#test",
                         help="Slack channel/person to send the message")
+    parser.add_argument('-s', '--subject',
+                        type=str,
+                        help="Subject")
     parser.add_argument('-m', '--message',
                         type=str,
                         help="Message to be sent")
@@ -41,6 +44,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.message and args.channel and args.message:
         if not args.debug and args.token:
-            send_message(args.token, args.channel, args.message)
+            send_message(args.token, args.channel, args.subject or "", args.message)
         else:
-            print(args.token, args.channel, args.message)
+            print(args.token, args.channel, args.subject or "", args.message)
